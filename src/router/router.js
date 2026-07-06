@@ -1,6 +1,7 @@
 import { renderHeader } from '../components/header/header.js'
 import { renderFooter } from '../components/footer/footer.js'
 import { routes } from './routes.js'
+import { isAuthenticated, signOutUser } from '../utils/auth.js'
 
 function normalizePath(pathname) {
   return pathname.replace(/\/+$/, '') || '/'
@@ -24,13 +25,28 @@ function matchRoute(pathname) {
 }
 
 export function createRouter(appRoot) {
+  async function navigate(pathname, { replace = false } = {}) {
+    const targetPath = normalizePath(pathname)
+
+    if (replace) {
+      window.history.replaceState({}, '', targetPath)
+    } else {
+      window.history.pushState({}, '', targetPath)
+    }
+
+    return render()
+  }
+
   async function render() {
     const pathname = normalizePath(window.location.pathname)
     const route = matchRoute(pathname)
 
     if (!route) {
-      window.history.replaceState({}, '', '/')
-      return render()
+      return navigate('/', { replace: true })
+    }
+
+    if (pathname === '/dashboard' && !isAuthenticated()) {
+      return navigate('/login', { replace: true })
     }
 
     const pageModule = await route.load()
@@ -52,11 +68,24 @@ export function createRouter(appRoot) {
     pageRoot.innerHTML = renderPage(route.params)
 
     if (typeof pageModule.mount === 'function') {
-      pageModule.mount(pageRoot, route.params)
+      pageModule.mount(pageRoot, route.params, {
+        navigate,
+        currentPath: pathname,
+        isAuthenticated,
+      })
     }
   }
 
   function handleClick(event) {
+    const logoutTrigger = event.target.closest('a[data-auth-logout]')
+
+    if (logoutTrigger) {
+      event.preventDefault()
+      signOutUser()
+      navigate('/', { replace: true })
+      return
+    }
+
     const anchor = event.target.closest('a[data-link]')
 
     if (!anchor || anchor.target === '_blank' || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
@@ -87,5 +116,6 @@ export function createRouter(appRoot) {
 
   return {
     start,
+    navigate,
   }
 }

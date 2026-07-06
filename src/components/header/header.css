@@ -32,6 +32,10 @@
   letter-spacing: 0.16em;
 }
 
+.site-header .navbar {
+  --bs-navbar-padding-y: 0;
+}
+
 .site-header .nav-link {
   border-radius: 999px;
   padding: 0.7rem 1rem;
@@ -45,44 +49,10 @@
   color: var(--zp-primary);
 }
 
+.site-header .btn {
+  white-space: nowrap;
+}
+
 .site-header .navbar-toggler {
   border-color: rgba(117, 75, 40, 0.2);
-}
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 1030;
-  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
-  background: rgba(248, 251, 255, 0.78);
-  backdrop-filter: blur(18px);
-}
-
-.site-header .navbar {
-  --bs-navbar-padding-y: 0;
-}
-
-.brand-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 0.75rem;
-  background: linear-gradient(135deg, #2563eb, #0f172a);
-  color: #ffffff;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-}
-
-.site-header .nav-link {
-  color: #334155;
-  font-weight: 700;
-  border-radius: 999px;
-  padding: 0.55rem 1rem;
-}
-
-.site-header .nav-link:hover,
-.site-header .nav-link.active {
-  color: #0f172a;
-  background: rgba(37, 99, 235, 0.1);
 }
