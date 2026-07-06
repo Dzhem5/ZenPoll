@@ -15,16 +15,7 @@
       </button>
       <div class="collapse navbar-collapse" id="siteNavigation">
         <div class="navbar-nav ms-auto align-items-lg-center gap-lg-1 mt-3 mt-lg-0">
-          <a class="nav-link {{homeActive}}" href="/" data-link>Home</a>
-          <a class="nav-link {{dashboardActive}}" href="/dashboard" data-link>Dashboard</a>
-          <a class="nav-link {{loginActive}}" href="/login" data-link>Login / Register</a>
-          <a class="nav-link {{pollsActive}}" href="/polls/42/" data-link>Poll Preview</a>
-          <a class="btn btn-vintage btn-sm ms-lg-2 mt-2 mt-lg-0" href="/dashboard" data-link>
-            <i class="bi bi-plus-circle me-2"></i>Create poll
-          </a>
-          <a class="{{authActionClass}}" href="{{authActionHref}}" {{authActionData}}>
-            <i class="bi {{authActionIcon}} me-2"></i>{{authActionLabel}}
-          </a>
+          {{navigationMarkup}}
         </div>
       </div>
     </nav>

@@ -2,28 +2,59 @@
   <div class="d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3 mb-4">
     <div>
       <p class="page-kicker mb-3"><i class="bi bi-speedometer2"></i> Dashboard</p>
-      <h1 class="page-title fw-bold mb-2">Operational overview</h1>
-      <p class="text-muted-zp mb-0">A control room styled to match the home page, with warm paper surfaces and editorial analytics cards.</p>
+      <h1 class="page-title fw-bold mb-2">Your poll room is live.</h1>
+      <p class="text-muted-zp mb-0">Participate in active polls, save your answers, and revisit everything you have voted on from your history.</p>
     </div>
-    <a class="btn btn-vintage" href="/polls/42/" data-link><i class="bi bi-arrow-right-circle me-2"></i>Open sample poll</a>
+    <div class="d-flex flex-wrap gap-2">
+      <a class="btn btn-outline-vintage" href="/" data-link><i class="bi bi-house-door me-2"></i>Home</a>
+      <button class="btn btn-vintage" type="button" data-dashboard-refresh><i class="bi bi-arrow-clockwise me-2"></i>Refresh</button>
+    </div>
   </div>
-  <div class="row g-3">
+
+  <div class="row g-3 mb-4">
     <div class="col-md-4">
-      <article class="vintage-card h-100 p-4">
+      <article class="vintage-card h-100 p-4 dashboard-stat">
         <p class="metric-label mb-1">Active polls</p>
-        <h2 class="metric-value mb-0">12</h2>
+        <h2 class="metric-value mb-0" data-dashboard-active-count>0</h2>
       </article>
     </div>
     <div class="col-md-4">
-      <article class="vintage-card h-100 p-4">
-        <p class="metric-label mb-1">Total votes</p>
-        <h2 class="metric-value mb-0">8.4k</h2>
+      <article class="vintage-card h-100 p-4 dashboard-stat">
+        <p class="metric-label mb-1">Saved answers</p>
+        <h2 class="metric-value mb-0" data-dashboard-history-count>0</h2>
       </article>
     </div>
     <div class="col-md-4">
-      <article class="vintage-card h-100 p-4">
-        <p class="metric-label mb-1">Conversion</p>
-        <h2 class="metric-value mb-0">93%</h2>
+      <article class="vintage-card h-100 p-4 dashboard-stat">
+        <p class="metric-label mb-1">Status</p>
+        <h2 class="metric-value mb-0 dashboard-status-value" data-dashboard-participation-count>Ready</h2>
+      </article>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-lg-7">
+      <article class="vintage-panel p-4 p-lg-5 h-100">
+        <div class="d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-2 mb-4">
+          <div>
+            <p class="section-label mb-2"><i class="bi bi-broadcast-pin"></i> Active polls</p>
+            <h2 class="h3 fw-bold mb-0">Vote in live polls</h2>
+          </div>
+          <span class="text-muted-zp small">One answer per question is stored in your history.</span>
+        </div>
+        <div class="dashboard-stack" data-dashboard-active-polls></div>
+      </article>
+    </div>
+    <div class="col-lg-5">
+      <article class="vintage-panel p-4 p-lg-5 h-100">
+        <div class="d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-2 mb-4">
+          <div>
+            <p class="section-label mb-2"><i class="bi bi-clock-history"></i> Answer history</p>
+            <h2 class="h3 fw-bold mb-0">Your saved responses</h2>
+          </div>
+          <span class="text-muted-zp small">Latest entries appear first.</span>
+        </div>
+        <div class="dashboard-history" data-dashboard-history></div>
       </article>
     </div>
   </div>

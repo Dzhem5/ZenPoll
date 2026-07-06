@@ -40,7 +40,21 @@ export function createRouter(appRoot) {
   async function render() {
     const pathname = normalizePath(window.location.pathname)
     const route = matchRoute(pathname)
-    const authState = await getAuthState()
+    let authState = {
+      authenticated: false,
+      session: null,
+      user: null,
+    }
+
+    try {
+      authState = await getAuthState()
+    } catch {
+      authState = {
+        authenticated: false,
+        session: null,
+        user: null,
+      }
+    }
 
     if (!route) {
       return navigate('/', { replace: true })
