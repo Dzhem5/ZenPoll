@@ -1,0 +1,18 @@
+.site-footer {
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.footer-card {
+  padding: 1rem 1.25rem;
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.footer-label {
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #2563eb;
+}

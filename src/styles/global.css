@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  color-scheme: light;
+  --zp-surface: rgba(255, 255, 255, 0.82);
+  --zp-surface-strong: #ffffff;
+  --zp-surface-border: rgba(15, 23, 42, 0.08);
+  --zp-text: #0f172a;
+  --zp-muted: #475569;
+  --zp-primary: #2563eb;
+  --zp-primary-soft: rgba(37, 99, 235, 0.12);
+  --zp-shadow: 0 24px 80px rgba(15, 23, 42, 0.12);
+}
+
+html {
+  min-height: 100%;
+  background:
+    radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), transparent 28%),
+    radial-gradient(circle at top right, rgba(14, 165, 233, 0.14), transparent 22%),
+    linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Manrope', system-ui, sans-serif;
+  color: var(--zp-text);
+  background: transparent;
+}
+
+a {
+  color: inherit;
+}
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-shell {
+  flex: 1;
+  padding: clamp(1.25rem, 2vw, 2rem) 0 clamp(2rem, 4vw, 3rem);
+}
+
+.page-frame {
+  background: var(--zp-surface);
+  border: 1px solid var(--zp-surface-border);
+  border-radius: 1.5rem;
+  box-shadow: var(--zp-shadow);
+  backdrop-filter: blur(18px);
+}
+
+.page-title {
+  letter-spacing: -0.04em;
+}
+
+.page-kicker {
+  color: var(--zp-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.text-muted-zp {
+  color: var(--zp-muted);
+}
