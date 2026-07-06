@@ -1,4 +1,218 @@
 .home-page {
   min-height: 28rem;
-  padding: clamp(2rem, 5vw, 4rem);
+  padding: clamp(1.5rem, 3vw, 3rem);
+}
+
+.home-stage {
+  position: relative;
+  overflow: hidden;
+}
+
+.home-ambient {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(8px);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.home-ambient--one {
+  top: -3rem;
+  right: -2rem;
+  width: 16rem;
+  height: 16rem;
+  background: radial-gradient(circle, rgba(154, 78, 42, 0.2) 0%, rgba(154, 78, 42, 0) 70%);
+  animation: pulseGlow 10s ease-in-out infinite;
+}
+
+.home-ambient--two {
+  bottom: -4rem;
+  left: -2rem;
+  width: 18rem;
+  height: 18rem;
+  background: radial-gradient(circle, rgba(47, 111, 114, 0.16) 0%, rgba(47, 111, 114, 0) 70%);
+  animation: pulseGlow 12s ease-in-out infinite reverse;
+}
+
+.hero-copy {
+  max-width: 42rem;
+}
+
+.home-stats .stat-label,
+.chart-figure {
+  font-family: 'IBM Plex Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.76rem;
+  color: var(--zp-muted);
+}
+
+.stat-value {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  letter-spacing: -0.05em;
+}
+
+.home-visual {
+  position: relative;
+  min-height: 38rem;
+}
+
+.visual-grid-row {
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr;
+  gap: 1rem;
+}
+
+.chart-panel,
+.ring-panel {
+  padding: 1rem;
+}
+
+.mini-bars {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  align-items: end;
+  gap: 0.55rem;
+  min-height: 14rem;
+}
+
+.mini-bars span {
+  display: block;
+  height: var(--bar-height);
+  min-height: 1.5rem;
+  border-radius: 999px 999px 0.4rem 0.4rem;
+  background: linear-gradient(180deg, #bb8b4c 0%, #9a4e2a 100%);
+  box-shadow: 0 10px 18px rgba(154, 78, 42, 0.2);
+  transform-origin: bottom;
+  animation: barBounce 4.8s ease-in-out infinite;
+}
+
+.mini-bars span:nth-child(2n) {
+  background: linear-gradient(180deg, #2f6f72 0%, #23595c 100%);
+  animation-delay: 0.2s;
+}
+
+.mini-bars span:nth-child(3n) {
+  animation-delay: 0.35s;
+}
+
+.ring-chart {
+  position: relative;
+  width: min(100%, 13rem);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background:
+    conic-gradient(var(--zp-primary) 0 64%, rgba(154, 78, 42, 0.14) 64% 100%);
+  box-shadow: inset 0 0 0 14px rgba(255, 248, 239, 0.82);
+}
+
+.ring-chart::before {
+  content: '';
+  position: absolute;
+  inset: 18%;
+  width: 66%;
+  height: 66%;
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgba(255, 250, 243, 0.96) 0%, rgba(248, 233, 209, 0.96) 100%);
+}
+
+.ring-chart__value {
+  position: absolute;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255, 248, 239, 0.9);
+  border: 1px solid rgba(117, 75, 40, 0.12);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.live-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--zp-primary);
+  box-shadow: 0 0 0 0 rgba(154, 78, 42, 0.34);
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.signal-ticker {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  padding: 0.85rem;
+}
+
+.ticker-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.floating-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.floating-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 248, 239, 0.76);
+  border: 1px solid rgba(117, 75, 40, 0.1);
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.floating-note i {
+  color: var(--zp-primary);
+}
+
+.home-cta {
+  position: relative;
+}
+
+@keyframes barBounce {
+  0%,
+  100% {
+    transform: scaleY(0.94);
+  }
+
+  50% {
+    transform: scaleY(1.08);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .home-visual {
+    min-height: auto;
+  }
+
+  .visual-grid-row,
+  .signal-ticker,
+  .floating-cards {
+    grid-template-columns: 1fr;
+  }
 }

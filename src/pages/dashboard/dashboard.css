@@ -1,11 +1,5 @@
 .dashboard-page {
-  padding: clamp(2rem, 5vw, 4rem);
-}
-
-.metric-card {
-  border-radius: 1.25rem;
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  padding: clamp(1.5rem, 3vw, 3rem);
 }
 
 .metric-label {
@@ -17,6 +11,7 @@
 }
 
 .metric-value {
+  font-family: 'Fraunces', Georgia, serif;
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
   letter-spacing: -0.05em;

@@ -1,21 +1,29 @@
 <header class="site-header">
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container py-2 py-lg-3">
-      <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="/" data-link>
-        <span class="brand-mark">ZP</span>
-        <span>ZenPoll</span>
+  <div class="container py-3 py-lg-4">
+    <nav class="navbar navbar-expand-lg site-nav vintage-panel px-3 px-lg-4 py-3 py-lg-3">
+      <a class="navbar-brand d-flex align-items-center gap-3 fw-bold mb-0" href="/" data-link>
+        <span class="brand-mark d-inline-flex align-items-center justify-content-center">
+          <i class="bi bi-pie-chart-fill"></i>
+        </span>
+        <span class="d-flex flex-column lh-sm">
+          <span class="brand-name">ZenPoll</span>
+          <small class="brand-subtitle">Vintage poll studio</small>
+        </span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#siteNavigation" aria-controls="siteNavigation" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="siteNavigation">
-        <div class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+        <div class="navbar-nav ms-auto align-items-lg-center gap-lg-1 mt-3 mt-lg-0">
           <a class="nav-link {{homeActive}}" href="/" data-link>Home</a>
           <a class="nav-link {{dashboardActive}}" href="/dashboard" data-link>Dashboard</a>
           <a class="nav-link {{loginActive}}" href="/login" data-link>Login</a>
-          <a class="nav-link {{pollsActive}}" href="/polls/42/" data-link>Poll</a>
+          <a class="nav-link {{pollsActive}}" href="/polls/42/" data-link>Poll Preview</a>
+          <a class="btn btn-vintage btn-sm ms-lg-2 mt-2 mt-lg-0" href="/dashboard" data-link>
+            <i class="bi bi-plus-circle me-2"></i>Create poll
+          </a>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </div>
 </header>

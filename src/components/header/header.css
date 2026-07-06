@@ -1,6 +1,56 @@
 .site-header {
   position: sticky;
   top: 0;
+  z-index: 20;
+}
+
+.site-nav {
+  box-shadow: 0 16px 40px rgba(94, 61, 30, 0.08);
+}
+
+.brand-mark {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.85rem;
+  background: linear-gradient(180deg, #9a4e2a 0%, #6d331a 100%);
+  color: #fff8ef;
+  box-shadow: 0 12px 22px rgba(154, 78, 42, 0.24);
+}
+
+.brand-name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.1rem;
+  letter-spacing: -0.03em;
+  color: var(--zp-text);
+}
+
+.brand-subtitle {
+  color: var(--zp-muted);
+  font-size: 0.72rem;
+  font-family: 'IBM Plex Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.site-header .nav-link {
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  color: var(--zp-text);
+  font-weight: 600;
+}
+
+.site-header .nav-link:hover,
+.site-header .nav-link.active {
+  background: rgba(255, 248, 239, 0.86);
+  color: var(--zp-primary);
+}
+
+.site-header .navbar-toggler {
+  border-color: rgba(117, 75, 40, 0.2);
+}
+.site-header {
+  position: sticky;
+  top: 0;
   z-index: 1030;
   border-bottom: 1px solid rgba(15, 23, 42, 0.08);
   background: rgba(248, 251, 255, 0.78);

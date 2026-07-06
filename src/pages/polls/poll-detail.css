@@ -1,11 +1,13 @@
 .poll-page {
-  padding: clamp(2rem, 5vw, 4rem);
+  padding: clamp(1.5rem, 3vw, 3rem);
 }
 
-.poll-hero,
-.panel-card {
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 1.5rem;
-  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+.poll-page .list-group-item {
+  background: rgba(255, 250, 243, 0.84);
+  border-color: rgba(117, 75, 40, 0.12);
+}
+
+.poll-page .list-group-item-action:hover,
+.poll-page .list-group-item-action:focus {
+  background: rgba(255, 243, 227, 0.96);
 }
