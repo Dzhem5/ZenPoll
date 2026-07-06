@@ -1,12 +1,11 @@
 import headerTemplate from './header.html?raw'
 import './header.css'
 import { interpolateTemplate } from '../../utils/template.js'
-import { getAuthUser, isAuthenticated } from '../../utils/auth.js'
 
-export function renderHeader(pathname = '/') {
+export function renderHeader(pathname = '/', authState = {}) {
   const normalizedPath = pathname.replace(/\/+$/, '') || '/'
-  const authenticated = isAuthenticated()
-  const user = getAuthUser()
+  const authenticated = Boolean(authState.authenticated)
+  const user = authState.user ?? null
 
   return interpolateTemplate(headerTemplate, {
     homeActive: normalizedPath === '/' ? 'active' : '',
@@ -16,7 +15,7 @@ export function renderHeader(pathname = '/') {
     authActionHref: authenticated ? '/' : '/login',
     authActionClass: authenticated ? 'btn btn-outline-vintage btn-sm ms-lg-2 mt-2 mt-lg-0' : 'btn btn-vintage btn-sm ms-lg-2 mt-2 mt-lg-0',
     authActionIcon: authenticated ? 'bi-box-arrow-right' : 'bi-person-circle',
-    authActionLabel: authenticated ? (user?.displayName ? `Logout ${user.displayName}` : 'Logout') : 'Login / Register',
+    authActionLabel: authenticated ? (user?.user_metadata?.full_name ? `Logout ${user.user_metadata.full_name}` : 'Logout') : 'Login / Register',
     authActionData: authenticated ? 'data-auth-logout="true"' : 'data-link',
   })
 }

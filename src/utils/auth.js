@@ -1,32 +1,20 @@
-const AUTH_STORAGE_KEY = 'zenpoll.auth.user'
+import { supabase } from './supabase.js'
 
-function readStoredUser() {
-  if (typeof window === 'undefined') {
-    return null
+export async function getAuthState() {
+  const { data, error } = await supabase.auth.getSession()
+
+  if (error) {
+    throw error
   }
 
-  try {
-    const rawUser = window.localStorage.getItem(AUTH_STORAGE_KEY)
-
-    if (!rawUser) {
-      return null
-    }
-
-    return JSON.parse(rawUser)
-  } catch {
-    return null
+  return {
+    authenticated: Boolean(data.session),
+    session: data.session ?? null,
+    user: data.session?.user ?? null,
   }
 }
 
-export function getAuthUser() {
-  return readStoredUser()
-}
-
-export function isAuthenticated() {
-  return Boolean(readStoredUser())
-}
-
-export function signInUser({ email, password }) {
+export async function signInUser({ email, password }) {
   const safeEmail = String(email ?? '').trim().toLowerCase()
   const safePassword = String(password ?? '')
 
@@ -34,18 +22,19 @@ export function signInUser({ email, password }) {
     throw new Error('Email and password are required.')
   }
 
-  const user = {
+  const { data, error } = await supabase.auth.signInWithPassword({
     email: safeEmail,
-    displayName: safeEmail.split('@')[0] || 'Creative User',
-    signedInAt: new Date().toISOString(),
-    mode: 'login',
+    password: safePassword,
+  })
+
+  if (error) {
+    throw error
   }
 
-  window.localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(user))
-  return user
+  return data
 }
 
-export function registerUser({ name, email, password }) {
+export async function registerUser({ name, email, password }) {
   const safeName = String(name ?? '').trim()
   const safeEmail = String(email ?? '').trim().toLowerCase()
   const safePassword = String(password ?? '')
@@ -54,22 +43,27 @@ export function registerUser({ name, email, password }) {
     throw new Error('Name, email, and password are required.')
   }
 
-  const user = {
-    name: safeName,
+  const { data, error } = await supabase.auth.signUp({
     email: safeEmail,
-    displayName: safeName,
-    signedInAt: new Date().toISOString(),
-    mode: 'register',
+    password: safePassword,
+    options: {
+      data: {
+        full_name: safeName,
+      },
+    },
+  })
+
+  if (error) {
+    throw error
   }
 
-  window.localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(user))
-  return user
+  return data
 }
 
-export function signOutUser() {
-  if (typeof window === 'undefined') {
-    return
-  }
+export async function signOutUser() {
+  const { error } = await supabase.auth.signOut()
 
-  window.localStorage.removeItem(AUTH_STORAGE_KEY)
+  if (error) {
+    throw error
+  }
 }

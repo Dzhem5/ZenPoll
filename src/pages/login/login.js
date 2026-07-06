@@ -34,7 +34,7 @@ export function mount(pageRoot, _params = {}, context = {}) {
   })
 
   forms.forEach((form) => {
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault()
 
       const formData = new FormData(form)
@@ -42,15 +42,25 @@ export function mount(pageRoot, _params = {}, context = {}) {
 
       try {
         if (form.dataset.authForm === 'register') {
-          const user = registerUser(payload)
-          status.textContent = `Welcome, ${user.displayName}. Your account is ready.`
-        } else {
-          const user = signInUser(payload)
-          status.textContent = `Welcome back, ${user.displayName}.`
-        }
+          const result = await registerUser(payload)
+          const fullName = result.user?.user_metadata?.full_name ?? payload.name ?? 'your account'
 
-        if (typeof navigate === 'function') {
-          navigate('/dashboard', { replace: true })
+          if (result.session) {
+            status.textContent = `Welcome, ${fullName}. Sending you to the dashboard.`
+            if (typeof navigate === 'function') {
+              navigate('/dashboard', { replace: true })
+            }
+          } else {
+            status.textContent = 'Account created. Check your inbox to confirm your email before signing in.'
+          }
+        } else {
+          const result = await signInUser(payload)
+          const displayName = result.user?.user_metadata?.full_name ?? result.user?.email ?? 'there'
+          status.textContent = `Welcome back, ${displayName}. Redirecting to the dashboard.`
+
+          if (typeof navigate === 'function') {
+            navigate('/dashboard', { replace: true })
+          }
         }
       } catch (error) {
         status.textContent = error instanceof Error ? error.message : 'Authentication failed.'

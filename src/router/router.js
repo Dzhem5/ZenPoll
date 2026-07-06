@@ -1,7 +1,7 @@
 import { renderHeader } from '../components/header/header.js'
 import { renderFooter } from '../components/footer/footer.js'
 import { routes } from './routes.js'
-import { isAuthenticated, signOutUser } from '../utils/auth.js'
+import { getAuthState, signOutUser } from '../utils/auth.js'
 
 function normalizePath(pathname) {
   return pathname.replace(/\/+$/, '') || '/'
@@ -40,12 +40,17 @@ export function createRouter(appRoot) {
   async function render() {
     const pathname = normalizePath(window.location.pathname)
     const route = matchRoute(pathname)
+    const authState = await getAuthState()
 
     if (!route) {
       return navigate('/', { replace: true })
     }
 
-    if (pathname === '/dashboard' && !isAuthenticated()) {
+    if (pathname === '/login' && authState.authenticated) {
+      return navigate('/dashboard', { replace: true })
+    }
+
+    if (pathname === '/dashboard' && !authState.authenticated) {
       return navigate('/login', { replace: true })
     }
 
@@ -55,7 +60,7 @@ export function createRouter(appRoot) {
     document.title = route.params.id ? `ZenPoll | Poll ${route.params.id}` : 'ZenPoll'
 
     appRoot.innerHTML = `
-      ${renderHeader(pathname)}
+      ${renderHeader(pathname, authState)}
       <main class="page-shell">
         <div class="container">
           <div id="page-root" class="page-frame"></div>
@@ -71,7 +76,7 @@ export function createRouter(appRoot) {
       pageModule.mount(pageRoot, route.params, {
         navigate,
         currentPath: pathname,
-        isAuthenticated,
+        authState,
       })
     }
   }
@@ -82,7 +87,8 @@ export function createRouter(appRoot) {
     if (logoutTrigger) {
       event.preventDefault()
       signOutUser()
-      navigate('/', { replace: true })
+        .then(() => navigate('/', { replace: true }))
+        .catch(() => navigate('/', { replace: true }))
       return
     }
 
